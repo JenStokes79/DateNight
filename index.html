@@ -26,7 +26,7 @@
 	  	</p>
 				<div class="panel panel-primary">
 		          <div class="panel-heading">
-		            <h3 class="panel-title"><strong>Your People</strong></h3>
+		            <h3 class="panel-title"><strong>Your Options</strong></h3>
 	          	</div>
 	          <div class="panel-body">
 	          	<table class="table" id="dateNightInfo"> 
@@ -34,7 +34,6 @@
 	          			<tr> 
 	          				<th>Movie Theater</th> 
 	          				<th>Restaurant</th> 
-	          				<th>Estimated Cost</th>
 	          			</tr> 
 	          		</thead>
 	          		<tbody> 
@@ -44,7 +43,7 @@
 
           </div>
 
-			<div class="panel panel-primary" class="addTrainPanel">
+			<div class="panel panel-primary" class="addDateOptionTable">
 	          <div class="panel-heading">
 	            <h3 class="panel-title"><strong>Date Night</strong></h3>
           	</div>
@@ -55,16 +54,31 @@
 			    <label for="zipCode">Zip Code</label>
 			    <input type="input" class="form-control" id="input-zipCode">
 			  </div>
-			  <div class="form-group">
-			    <label for="movieGenre">Movie Genre</label>
-			    <input type="input" class="form-control" id="input-movieGenre">
-			    <!-- drop down menu of acceptable entries -->
-			  </div>
-			  <div class="form-group">
-			    <label for="foodCategories">Food Categories</label>
-			    <!-- drop down menue of acceptable entries -->
-			    <input type="USD" class="form-control" id="input-foodCategories">
-			  </div>
+			  <h3>Movie Genre: Please select one</h3>
+			  <form>
+			    <div class="form-group">
+			      <label for="sel1">Select list (select one):</label>
+			      <select class="form-control" id="sel1">
+			        <option id="chinese">Science Fiction</option>
+			        <option id="japanese">Adventure</option>
+			        <option id="american">Action</option>
+			        <option id="italian">Romantic Comedy</option>
+			        <option id="chinese">Comedy</option>
+			        <option id="japanese">Drama</option>
+			        <option id="american">Documentary</option>
+			        <option id="italian">Martial Arts</option>
+			      </select>
+			  <!-- This is the user food input -->
+			  <h3>Food Type: Please select one</h3>
+			  <form>
+			    <div class="form-group">
+			      <label for="sel1">Select list (select one):</label>
+			      <select class="form-control" id="sel1">
+			        <option id="chinese">Chinese</option>
+			        <option id="japanese">Japanese</option>
+			        <option id="american">American</option>
+			        <option id="italian">Italian</option>
+			      </select>
 			  <button type="submit" class="btn btn-default" id="search"><i class="fa fa-search"></i>Search</button>
 			  
 			</form>
