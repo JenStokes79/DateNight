@@ -13,7 +13,7 @@
 </head>
 
 <body>
-	<div class="container">
+	<div class="container" style="background-image: url(background.jpeg)">
 
 		<div class="jumbotron" style="background-color: rgb(242, 69, 63) ; color: white;">
 
@@ -52,18 +52,20 @@
 <!-- This is the form to input your search -->	
  			<form role="form">
 			  <div class="form-group">
-			    <label for="emp name">Movie</label>
-			    <input type="input" class="form-control" id="input-Name">
+			    <label for="zipCode">Zip Code</label>
+			    <input type="input" class="form-control" id="input-zipCode">
 			  </div>
 			  <div class="form-group">
-			    <label for="destination">Food</label>
-			    <input type="input" class="form-control" id="input-occasion">
+			    <label for="movieGenre">Movie Genre</label>
+			    <input type="input" class="form-control" id="input-movieGenre">
+			    <!-- drop down menu of acceptable entries -->
 			  </div>
 			  <div class="form-group">
-			    <label for="trainTime">Food Price</label>
-			    <input type="USD" class="form-control" id="input-priceLimit">
+			    <label for="foodCategories">Food Categories</label>
+			    <!-- drop down menue of acceptable entries -->
+			    <input type="USD" class="form-control" id="input-foodCategories">
 			  </div>
-			  <button type="submit" class="btn btn-default" id="addTrain"><i class="fa fa-search"></i>Submit</button>
+			  <button type="submit" class="btn btn-default" id="search"><i class="fa fa-search"></i>Search</button>
 			  
 			</form>
 		 
