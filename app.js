@@ -1,5 +1,22 @@
 //adding JS
 
+// Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAuFAnHqqcwCrlmw_BGAwAK2B44sL-6C6w",
+    authDomain: "the-indecisive-dater.firebaseapp.com",
+    databaseURL: "https://the-indecisive-dater.firebaseio.com",
+    projectId: "the-indecisive-dater",
+    storageBucket: "the-indecisive-dater.appspot.com",
+    messagingSenderId: "312093581828"
+  };
+  firebase.initializeApp(config);
+
+  var database = firebase.database();
+
+
+
+
+
 // function to find restaurant
 function searchRestaurant(argument) {
 	//Yelp AJAX Call
@@ -50,6 +67,10 @@ $(document).ready(function() {
 	$(document).on('click', '#search', searchRestaurant)
 	// $(document).on('click', '#moviesearch', searchMovie)
 	// $(document).on('click', '#search', searchMovie)
+	event.preventDefault();
+
+	
+
 
 })
 
