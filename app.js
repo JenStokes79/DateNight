@@ -21,11 +21,9 @@
 function searchRestaurant(argument) {
 	//Yelp AJAX Call
 	var foodZip =  $('#input-zipCode').val().trim();
-	var url = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=restaurant&location=" + foodZip
-	var foodCategory = $('#sel2').text().trim();
-
+	var foodCategory = $('#sel2').val().trim().toLowerCase()
+	var url = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=restaurant&location="+foodZip+"&categories="+foodCategory
 	var settings = {
-		 "category": foodCategory,
 		 "async": true,
 		 "crossDomain": true,
 		 "url": url,
@@ -37,7 +35,7 @@ function searchRestaurant(argument) {
 	$.ajax(settings).done(function (response) {
 		 console.log(response);
 	})
-	console.log(foodCategory)
+	console.log($('#sel2').val().trim().toLowerCase())
 }
 
 function searchMovie(argument) {
