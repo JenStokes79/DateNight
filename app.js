@@ -16,9 +16,22 @@ function searchRestaurant(argument) {
 		 }
 	}
 	$.ajax(settings).done(function (response) {
-		 console.log(response);
+		console.log(response);
+// test------code to isolate certain properties without having to make a request to showtimeAPI
+		// var findstars = function(starnumber) {
+		// 	// return response.businesses[0]
+		//     for (var i = 0, len = response.businesses.length; i < len; i++) {
+		//         if (response.businesses[i].rating === starnumber)
+		//             console.log(response.businesses[i]); // Return as soon as the object is found
+		//     } console(null); // The object was not found
+		// }		 
+		// console.log(findstars(4))
 	})
-	console.log($('#sel2').val().trim().toLowerCase())
+	console.log(foodCategory)
+
+
+
+
 }
 
 function searchMovie(argument) {
@@ -37,19 +50,28 @@ function searchMovie(argument) {
        	    	api_key: apikey,
       		   },			
     	dataType: "jsonp",
-     		// method: "GET",
        	});
 }
 
+
+
 function dataHandler(data){
+	var movieGenre = $('#sel1').val()
 	console.log(data)
+	for (var i = 0; i < data.length; i++) {
+		if (typeof data[i].genres != "undefined") {
+			if (data[i].genres.includes(movieGenre)) {
+				console.log(data[i])
+			}
+		}
+	}
 }
+
+	 
 
 $(document).ready(function() {
 	console.log('js is working')
 	$(document).on('click', '#search', searchRestaurant)
-	// $(document).on('click', '#moviesearch', searchMovie)
 	// $(document).on('click', '#search', searchMovie)
-
 })
 
