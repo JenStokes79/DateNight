@@ -43,6 +43,25 @@ function searchRestaurant(argument) {
 		//     } console(null); // The object was not found
 		// }		 
 		// console.log(findstars(4))
+
+		var results = response;
+        console.log(results);
+         
+        //console.log('mathRandom', results.businesses[Math.floor((Math.random() * 19) + 1)]);
+        var random = Math.floor((Math.random() * 19) + 1);
+        var randomFoodResult = results.businesses[random];
+        console.log('randomFoodResult', randomFoodResult);
+        //Create variables from the ajax call to display restaurant info into the DOM
+        var fName = randomFoodResult.name;
+        var fLocation = randomFoodResult.location;
+        var fRating = randomFoodResult.ratin;
+        var fPhone = randomFoodResult.display_phone;
+        
+        //Display results in the DOM
+        $('#yelpResults').append(fName);
+
+
+
 	})
 	console.log(foodCategory)
 
@@ -68,8 +87,11 @@ function searchMovie(argument) {
        	    	api_key: apikey,
       		   },			
     	dataType: "jsonp",
-       	});
+       	})
+
+       		
 }
+
 
 
 
@@ -80,7 +102,7 @@ function dataHandler(data){
 		if (typeof data[i].genres != "undefined") {
 			if (data[i].genres.includes(movieGenre)) {
 				console.log(data[i])
-			}
+			} 
 		}
 	}
 }
@@ -90,7 +112,7 @@ function dataHandler(data){
 $(document).ready(function() {
 	console.log('js is working')
 	$(document).on('click', '#search', searchRestaurant)
-	// $(document).on('click', '#search', searchMovie)
+	$(document).on('click', '#search', searchMovie)
 	// event.preventDefault();
 	$(document).on('click', '#viewOptions', searchRestaurant)
 
@@ -99,8 +121,8 @@ $(document).ready(function() {
 //added a click buttin for when the user chooses to select their date night combo
 //once you click selct the data will push to firebase and the table above
 $("#select").on("click", function(event) {
-var movie = $("#movieResult").val();
-var restaurant = $("#yelpResults").val();
+var movie = $("#movieResult").text();
+var restaurant = $("#yelpResults").text();
 
 var dateNight = {
 	movie: movie,
@@ -109,8 +131,8 @@ var dateNight = {
 
  database.ref().push(dateNight);
 
- console.log(dateNight.movie); //data going to firebase but is " ". i think once we push the results it will show 
- console.log(dateNight.restaurant); //data going to firebase but is " ". i think once we push the results it will show 
+ console.log(dateNight.movie); //data going to firebase 
+ console.log(dateNight.restaurant); //data going to firebase 
 
 
 database.ref().on("child_added", function(childSnapshot, prevChildKay){
