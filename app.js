@@ -29,10 +29,11 @@ function searchRestaurant(argument) {
 		 "url": url,
 		 "method": "GET",
 		 "headers": {
-		   "authorization": "Bearer S7Iu9qp-LWQHVALB4GweWmd0ngVavSMAcMatDXn6PFk6tXIFDWBa4uNxhawNkJllDGo5c5-JvrIjIBvf-581Y4jxpPpsQZKExlOMEtEgyC-4g4wq0zjxutTqeZY0WnYx",
+		 "authorization": "Bearer S7Iu9qp-LWQHVALB4GweWmd0ngVavSMAcMatDXn6PFk6tXIFDWBa4uNxhawNkJllDGo5c5-JvrIjIBvf-581Y4jxpPpsQZKExlOMEtEgyC-4g4wq0zjxutTqeZY0WnYx",
 		 }
 	}
 	$.ajax(settings).done(function (response) {
+
 		 console.log(response);
 		 
 		var results = response;
@@ -50,51 +51,70 @@ function searchRestaurant(argument) {
 		
 		//Display results in the DOM
 		$('#yelpResults').append(fName);
-		$('#yelpResults').append(fLocation);
-		$('#yelpResults').append(fRating);
-		$('#yelpResults').append(fPhone);
+		$('#yelpResults').append('Address: ', fLocation);
+		$('#yelpResults').append('Rating: ', fRating);
+		$('#yelpResults').append('Phone: ', fPhone);
+
+// test------code to isolate certain properties without having to make a request to showtimeAPI
+		// var findstars = function(starnumber) {
+		// 	// return response.businesses[0]
+		//     for (var i = 0, len = response.businesses.length; i < len; i++) {
+		//         if (response.businesses[i].rating === starnumber)
+		//             console.log(response.businesses[i]); // Return as soon as the object is found
+		//     } console(null); // The object was not found
+		// }		 
+		// console.log(findstars(4))
 	})
-	console.log($('#sel2').val().trim().toLowerCase())
 }
 
-// function searchMovie(argument) {
-// 	var apikey = "36zcs2fpun2vtymn2qsvz6kd";
-//     var baseUrl = "http://data.tmsapi.com/v1.1";
-//     var showtimesUrl = baseUrl + '/movies/showings';
-//     var zipCode = $('#input-zipCode').val().trim();
-//     var d = new Date();
-//     var today = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate();
-//   	$.ajax({
-//        	url: showtimesUrl,
-//       	data: {	
-//         	  	startDate: today,
-//        	 	   	zip: zipCode,
-//        	   	 	jsonp: "dataHandler",
-//        	    	api_key: apikey,
-//       		   },			
-//     	dataType: "jsonp",
-//      		// method: "GET",
-//        	});
-// }
+
+function searchMovie(argument) {
+	var apikey = "36zcs2fpun2vtymn2qsvz6kd";
+    var baseUrl = "http://data.tmsapi.com/v1.1";
+    var showtimesUrl = baseUrl + '/movies/showings';
+    var zipCode = $('#input-zipCode').val().trim();
+    var d = new Date();
+    var today = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate();
+  	$.ajax({
+       	url: showtimesUrl,
+      	data: {	
+        	  	startDate: today,
+       	 	   	zip: zipCode,
+       	   	 	jsonp: "dataHandler",
+       	    	api_key: apikey,
+      		   },			
+    	dataType: "jsonp",
+       	})
+
+       		
+}
 
 function dataHandler(data){
+	var movieGenre = $('#sel1').val()
 	console.log(data)
+	for (var i = 0; i < data.length; i++) {
+		if (typeof data[i].genres != "undefined") {
+			if (data[i].genres.includes(movieGenre)) {
+				console.log(data[i])
+			} 
+		}
+	}
 }
+
 
 $(document).ready(function() {
 	console.log('js is working')
 	$(document).on('click', '#search', searchRestaurant)
-	// $(document).on('click', '#moviesearch', searchMovie)
-	// $(document).on('click', '#search', searchMovie)
-	//event.preventDefault();
+	//$(document).on('click', '#search', searchMovie)
+	// event.preventDefault();
 
 })
 
 //added a click buttin for when the user chooses to select their date night combo
 //once you click selct the data will push to firebase and the table above
 $("#select").on("click", function(event) {
-var movie = $("#movieResult").val();
-var restaurant = $("#yelpResults").val();
+var movie = $("#movieResult").text();
+var restaurant = $("#yelpResults").text();
 
 var dateNight = {
 	movie: movie,
@@ -103,8 +123,8 @@ var dateNight = {
 
  database.ref().push(dateNight);
 
- console.log(dateNight.movie); //data going to firebase but is " ". i think once we push the results it will show 
- console.log(dateNight.restaurant); //data going to firebase but is " ". i think once we push the results it will show 
+ console.log(dateNight.movie); //data going to firebase 
+ console.log(dateNight.restaurant); //data going to firebase 
 
 
 database.ref().on("child_added", function(childSnapshot, prevChildKay){
@@ -123,6 +143,8 @@ var restaurant = childSnapshot.val().restaurant;
 console.log("FB is working")
 
 });
+
+
 //firebase is working, just need to figure out how to select results.
 
 
