@@ -85,13 +85,14 @@ function dataHandler(data){
 	}
 }
 
-	 
+
 
 $(document).ready(function() {
 	console.log('js is working')
 	$(document).on('click', '#search', searchRestaurant)
 	// $(document).on('click', '#search', searchMovie)
 	// event.preventDefault();
+	$(document).on('click', '#viewOptions', searchRestaurant)
 
 })
 
