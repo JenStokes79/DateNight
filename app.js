@@ -34,6 +34,25 @@ function searchRestaurant(argument) {
 	}
 	$.ajax(settings).done(function (response) {
 		 console.log(response);
+		 
+		var results = response;
+		console.log(results);
+		 
+		//console.log('mathRandom', results.businesses[Math.floor((Math.random() * 19) + 1)]);
+		var random = Math.floor((Math.random() * 19) + 1);
+		var randomFoodResult = results.businesses[random];
+		console.log('randomFoodResult', randomFoodResult);
+		//Create variables from the ajax call to display restaurant info into the DOM
+		var fName = randomFoodResult.name;
+		var fLocation = randomFoodResult.location;
+		var fRating = randomFoodResult.rating;
+		var fPhone = randomFoodResult.display_phone;
+		
+		//Display results in the DOM
+		$('#yelpResults').append(fName);
+		$('#yelpResults').append(fLocation);
+		$('#yelpResults').append(fRating);
+		$('#yelpResults').append(fPhone);
 	})
 	console.log($('#sel2').val().trim().toLowerCase())
 }
@@ -102,7 +121,8 @@ var restaurant = childSnapshot.val().restaurant;
 });
 
 console.log("FB is working")
-})
+
+});
 //firebase is working, just need to figure out how to select results.
 
 
