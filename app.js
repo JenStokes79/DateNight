@@ -34,15 +34,15 @@ function searchRestaurant(argument) {
 	}
 	$.ajax(settings).done(function (response) {
 
-		 console.log(response);
+		//console.log('response', response);
 		 
 		var results = response;
-		console.log(results);
+		// console.log('results', results);
 		 
 		//console.log('mathRandom', results.businesses[Math.floor((Math.random() * 19) + 1)]);
-		var random = Math.floor((Math.random() * 19) + 1);
-		var randomFoodResult = results.businesses[random];
-		console.log('randomFoodResult', randomFoodResult);
+		var randomFood = Math.floor((Math.random() * 19) + 1);
+		var randomFoodResult = results.businesses[randomFood];
+		// console.log('randomFoodResult', randomFoodResult);
 		//Create variables from the ajax call to display restaurant info into the DOM
 		var fName = randomFoodResult.name;
 		var fLocation = randomFoodResult.location;
@@ -85,27 +85,34 @@ function searchMovie(argument) {
       		   },			
     	dataType: "jsonp",
        	})
-
+   
        		
 }
 
 function dataHandler(data){
 	var movieGenre = $('#sel1').val()
-	console.log(data)
+	console.log('data', data)
 	for (var i = 0; i < data.length; i++) {
 		if (typeof data[i].genres != "undefined") {
 			if (data[i].genres.includes(movieGenre)) {
-				console.log(data[i])
+				console.log('data[i]', data[i])
+	
+				mGenreReturned = data[i];
+				mGenreArray = [];
+
+				mGenreArray.push(mGenreReturned);
+				console.log('mGenreArray', mGenreArray);
 			} 
 		}
 	}
+
 }
 
 
 $(document).ready(function() {
 	console.log('js is working')
 	$(document).on('click', '#search', searchRestaurant)
-	//$(document).on('click', '#search', searchMovie)
+	$(document).on('click', '#search', searchMovie)
 	// event.preventDefault();
 
 })
