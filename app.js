@@ -97,11 +97,11 @@ function dataHandler(data){
 			if (data[i].genres.includes(movieGenre)) {
 				console.log('data[i]', data[i])
 	
-				mGenreReturned = data[i];
-				mGenreArray = [];
+				// mGenreReturned = data[i];
+				// mGenreArray = [];
 
-				mGenreArray.push(mGenreReturned);
-				console.log('mGenreArray', mGenreArray);
+				// mGenreArray.push(mGenreReturned);
+				// console.log('mGenreArray', mGenreArray);
 			} 
 		}
 	}
