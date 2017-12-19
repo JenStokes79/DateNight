@@ -64,11 +64,8 @@ function searchRestaurant(argument) {
 
 	})
 	console.log(foodCategory)
-
-
-
-
 }
+
 
 
 function searchMovie(argument) {
@@ -93,18 +90,41 @@ function searchMovie(argument) {
 }
 
 
-
+var movieArray=['']
 
 function dataHandler(data){
 	var movieGenre = $('#sel1').val()
 	console.log(data)
+	movieArray=[]
 	for (var i = 0; i < data.length; i++) {
 		if (typeof data[i].genres != "undefined") {
 			if (data[i].genres.includes(movieGenre)) {
 				console.log(data[i])
+				movieArray.push(data[i])
+
 			} 
 		}
 	}
+	console.log(movieArray)
+}
+
+function randomMovie(argument) {
+	console.log(movieArray)
+	// var results = response;
+ //    console.log(results);
+     
+ //    //console.log('mathRandom', results.businesses[Math.floor((Math.random() * 19) + 1)]);
+ //    var random = Math.floor((Math.random() * 19) + 1);
+ //    var randomFoodResult = results.businesses[random];
+ //    console.log('randomFoodResult', randomFoodResult);
+ //    //Create variables from the ajax call to display restaurant info into the DOM
+ //    var fName = randomFoodResult.name;
+ //    var fLocation = randomFoodResult.location;
+ //    var fRating = randomFoodResult.ratin;
+ //    var fPhone = randomFoodResult.display_phone;
+    
+ //    //Display results in the DOM
+ //    $('#yelpResults').append(fName);
 }
 
 
@@ -115,7 +135,9 @@ $(document).ready(function() {
 	$(document).on('click', '#search', searchMovie)
 	// event.preventDefault();
 	$(document).on('click', '#viewOptions', searchRestaurant)
-
+	$(document).on('click', '#viewOptions', function() {
+		console.log(movieArray)
+	})
 })
 
 //added a click buttin for when the user chooses to select their date night combo
