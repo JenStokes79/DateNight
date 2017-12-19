@@ -140,9 +140,9 @@ $(document).ready(function() {
 	$(document).on('click', '#search', searchMovie)
 	// event.preventDefault();
 	$(document).on('click', '#viewOptions', searchRestaurant)
-	$(document).on('click', '#viewOptions', function() {
-		console.log(movieArray)
-	})
+	// $(document).on('click', '#viewOptions', function() {
+	// 	console.log(movieArray)
+	// })
 })
 
 //added a click buttin for when the user chooses to select their date night combo
