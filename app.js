@@ -33,28 +33,7 @@ function searchRestaurant(argument) {
 		 }
 	}
 	$.ajax(settings).done(function (response) {
-
-		//console.log('response', response);
-		 
-		var results = response;
-		// console.log('results', results);
-		 
-		//console.log('mathRandom', results.businesses[Math.floor((Math.random() * 19) + 1)]);
-		var randomFood = Math.floor((Math.random() * 19) + 1);
-		var randomFoodResult = results.businesses[randomFood];
-		// console.log('randomFoodResult', randomFoodResult);
-		//Create variables from the ajax call to display restaurant info into the DOM
-		var fName = randomFoodResult.name;
-		var fLocation = randomFoodResult.location;
-		var fRating = randomFoodResult.rating;
-		var fPhone = randomFoodResult.display_phone;
-		
-		//Display results in the DOM
-		$('#yelpResults').append(fName);
-		$('#yelpResults').append('Address: ', fLocation);
-		$('#yelpResults').append('Rating: ', fRating);
-		$('#yelpResults').append('Phone: ', fPhone);
-
+		// console.log(response);
 // test------code to isolate certain properties without having to make a request to showtimeAPI
 		// var findstars = function(starnumber) {
 		// 	// return response.businesses[0]
@@ -64,12 +43,33 @@ function searchRestaurant(argument) {
 		//     } console(null); // The object was not found
 		// }		 
 		// console.log(findstars(4))
+
+		var results = response;
+        console.log('yelp results', results);
+         
+        //console.log('mathRandom', results.businesses[Math.floor((Math.random() * 19) + 1)]);
+        var fRandom = Math.floor((Math.random() * 19) + 1);
+        var randomFoodResult = results.businesses[fRandom];
+        console.log('randomFoodResult', randomFoodResult);
+        //Create variables from the ajax call to display restaurant info into the DOM
+        var fName = randomFoodResult.name;
+        var fLocation = randomFoodResult.location;
+        var fRating = randomFoodResult.rating;
+        var fPhone = randomFoodResult.display_phone;
+        
+        //Display results in the DOM
+        $('#yelpResults').append(fName);
+
+
+
 	})
+	console.log('foodCategory', foodCategory)
 }
 
 
+
 function searchMovie(argument) {
-	var apikey = "36zcs2fpun2vtymn2qsvz6kd";
+	var apikey = "kh99q83z7y2cwgvavy3tgekn";
     var baseUrl = "http://data.tmsapi.com/v1.1";
     var showtimesUrl = baseUrl + '/movies/showings';
     var zipCode = $('#input-zipCode').val().trim();
@@ -85,28 +85,48 @@ function searchMovie(argument) {
       		   },			
     	dataType: "jsonp",
        	})
-   
+
        		
 }
 
+
+var movieArray=['']
+var randomMovieResult = []
+var mName = ''
 function dataHandler(data){
 	var movieGenre = $('#sel1').val()
 	console.log('data', data)
+	movieArray=[]
 	for (var i = 0; i < data.length; i++) {
 		if (typeof data[i].genres != "undefined") {
 			if (data[i].genres.includes(movieGenre)) {
 				console.log('data[i]', data[i])
-	
-				// mGenreReturned = data[i];
-				// mGenreArray = [];
+				movieArray.push(data[i])
 
-				// mGenreArray.push(mGenreReturned);
-				// console.log('mGenreArray', mGenreArray);
 			} 
 		}
 	}
-
+	console.log('movieArray', movieArray)
+	randomMovie()
+	$('#movieResult').append(mName);
 }
+
+function randomMovie() {
+	var mRandom = Math.floor((Math.random() * movieArray.length) + 1);
+	randomMovieResult = movieArray[mRandom]
+	console.log('randomMovieResult= ', randomMovieResult)
+	mName = randomMovieResult.title
+}
+
+    //Create variables from the ajax call to display movie info into the DOM
+
+    // var mLocation = randomMovieResult.location;
+    // var mRating = randomMovieResult.qualityRating.value;
+    // var mShowtimes = randomMovieResult.showtimes[].;
+    
+    //Display results in the DOM
+
+
 
 
 $(document).ready(function() {
@@ -114,7 +134,10 @@ $(document).ready(function() {
 	$(document).on('click', '#search', searchRestaurant)
 	$(document).on('click', '#search', searchMovie)
 	// event.preventDefault();
-
+	$(document).on('click', '#viewOptions', searchRestaurant)
+	$(document).on('click', '#viewOptions', function() {
+		console.log(movieArray)
+	})
 })
 
 //added a click buttin for when the user chooses to select their date night combo
@@ -149,9 +172,6 @@ var restaurant = childSnapshot.val().restaurant;
 
 console.log("FB is working")
 
-});
-
-
+})
 //firebase is working, just need to figure out how to select results.
-
 
