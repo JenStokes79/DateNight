@@ -149,8 +149,9 @@ $(document).ready(function() {
 //added a click buttin for when the user chooses to select their date night combo
 //once you click selct the data will push to firebase and the table above
 $("#select").on("click", function(event) {
-var movie = $("#movieResult").text();
-var restaurant = $("#yelpResults").text();
+	event.preventDefault();
+var movie = $("#movieResult").text().trim();
+var restaurant = $("#yelpResults").text().trim();
 
 var dateNight = {
 	movie: movie,
@@ -161,7 +162,8 @@ var dateNight = {
 
  console.log(dateNight.movie); //data going to firebase 
  console.log(dateNight.restaurant); //data going to firebase 
-
+ $("#movieResult").text("");
+ $("#yelpResults").text("");
 
 database.ref().on("child_added", function(childSnapshot, prevChildKay){
 
