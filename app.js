@@ -33,7 +33,9 @@ function searchRestaurant(argument) {
 		 }
 	}
 	$.ajax(settings).done(function (response) {
-		console.log(response);
+
+		// console.log(response);
+
 // test------code to isolate certain properties without having to make a request to showtimeAPI
 		// var findstars = function(starnumber) {
 		// 	// return response.businesses[0]
@@ -45,16 +47,16 @@ function searchRestaurant(argument) {
 		// console.log(findstars(4))
 
 		var results = response;
-        console.log(results);
+        console.log('yelp results', results);
          
         //console.log('mathRandom', results.businesses[Math.floor((Math.random() * 19) + 1)]);
-        var random = Math.floor((Math.random() * 19) + 1);
-        var randomFoodResult = results.businesses[random];
+        var fRandom = Math.floor((Math.random() * 19) + 1);
+        var randomFoodResult = results.businesses[fRandom];
         console.log('randomFoodResult', randomFoodResult);
         //Create variables from the ajax call to display restaurant info into the DOM
         var fName = randomFoodResult.name;
         var fLocation = randomFoodResult.location;
-        var fRating = randomFoodResult.ratin;
+        var fRating = randomFoodResult.rating;
         var fPhone = randomFoodResult.display_phone;
         
         //Display results in the DOM
@@ -63,7 +65,8 @@ function searchRestaurant(argument) {
 
 
 	})
-	console.log(foodCategory)
+	
+	console.log('foodCategory', foodCategory)
 }
 
 
@@ -95,27 +98,29 @@ var randomMovieResult = []
 var mName = ''
 function dataHandler(data){
 	var movieGenre = $('#sel1').val()
-	console.log(data)
+
+	console.log('data', data)
+
 	movieArray=[]
 	for (var i = 0; i < data.length; i++) {
 		if (typeof data[i].genres != "undefined") {
 			if (data[i].genres.includes(movieGenre)) {
-				console.log(data[i])
+				console.log('data[i]', data[i])
 				movieArray.push(data[i])
 
 			} 
 		}
 	}
-	console.log(movieArray)
+
+	console.log('movieArray', movieArray)
 	randomMovie()
 	$('#movieResult').append(mName);
 }
 
 function randomMovie() {
-	var random = Math.floor((Math.random() * movieArray.length) + 1);
-	randomMovieResult = movieArray[random]
-	console.log('randomMovieResult= ')
-	console.log(randomMovieResult)
+	var mRandom = Math.floor((Math.random() * movieArray.length) + 1);
+	randomMovieResult = movieArray[mRandom]
+	console.log('randomMovieResult= ', randomMovieResult)
 	mName = randomMovieResult.title
 }
 
@@ -177,5 +182,4 @@ console.log("FB is working")
 
 })
 //firebase is working, just need to figure out how to select results.
-
 
