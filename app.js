@@ -22,7 +22,7 @@ function searchRestaurant(argument) {
 	//Yelp AJAX Call
 	var foodZip =  $('#input-zipCode').val().trim();
 	var foodCategory = $('#sel2').val().trim().toLowerCase()
-	var url = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=restaurant&location="+foodZip+"&categories="+foodCategory
+	var url = "https://cryptic-headland-94862.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=restaurant&location="+foodZip+"&categories="+foodCategory
 	var settings = {
 		 "async": true,
 		 "crossDomain": true,
@@ -60,7 +60,7 @@ function searchRestaurant(argument) {
         var fPhone = randomFoodResult.display_phone;
         
         //Display results in the DOM
-        $('#yelpResults').append(fName);
+        $('#yelpResults').html(fName);
 
 
 
@@ -114,7 +114,7 @@ function dataHandler(data){
 
 	console.log('movieArray', movieArray)
 	randomMovie()
-	$('#movieResult').append(mName);
+	$('#movieResult').html(mName);
 }
 
 function randomMovie() {
@@ -139,10 +139,10 @@ $(document).ready(function() {
 	console.log('js is working')
 	$(document).on('click', '#search', searchRestaurant)
 	$(document).on('click', '#search', searchMovie)
-	// event.preventDefault();
 	$(document).on('click', '#viewOptions', searchRestaurant)
 	$(document).on('click', '#viewOptions', function() {
 		console.log(movieArray)
+		
 	})
 })
 
@@ -165,17 +165,16 @@ var dateNight = {
  $("#movieResult").text("");
  $("#yelpResults").text("");
 
-database.ref().on("child_added", function(childSnapshot, prevChildKay){
+$('#clearthis').empty();
+database.ref().on("child_added", function(childSnapshot, prevChildKey){
 
 console.log(childSnapshot.val()); 
 
-
-
 var movie = childSnapshot.val().movie;
 var restaurant = childSnapshot.val().restaurant;
-
+//var dates = []
   //pushes selected results into table
- $("#dateNightInfo > tbody").append("<tr><td>" + movie + "</td><td>" + restaurant + "</td><td>");
+ $("#dateNightInfo > tbody").prepend("<tr><td>" + movie + "</td><td>" + restaurant + "</td></tr>");
 });
 
 console.log("FB is working")
