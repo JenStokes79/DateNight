@@ -33,7 +33,9 @@ function searchRestaurant(argument) {
 		 }
 	}
 	$.ajax(settings).done(function (response) {
+
 		// console.log(response);
+
 // test------code to isolate certain properties without having to make a request to showtimeAPI
 		// var findstars = function(starnumber) {
 		// 	// return response.businesses[0]
@@ -63,6 +65,7 @@ function searchRestaurant(argument) {
 
 
 	})
+	
 	console.log('foodCategory', foodCategory)
 }
 
@@ -95,7 +98,9 @@ var randomMovieResult = []
 var mName = ''
 function dataHandler(data){
 	var movieGenre = $('#sel1').val()
+
 	console.log('data', data)
+
 	movieArray=[]
 	for (var i = 0; i < data.length; i++) {
 		if (typeof data[i].genres != "undefined") {
@@ -106,6 +111,7 @@ function dataHandler(data){
 			} 
 		}
 	}
+
 	console.log('movieArray', movieArray)
 	randomMovie()
 	$('#movieResult').append(mName);
