@@ -55,7 +55,7 @@
 
 function searchMovie(argument) {
 	var apikey = "kh99q83z7y2cwgvavy3tgekn";
-    var baseUrl = "http://data.tmsapi.com/v1.1";
+    var baseUrl = "https://data.tmsapi.com/v1.1";
     var showtimesUrl = baseUrl + '/movies/showings';
     var zipCode = $('#input-zipCode').val().trim();
     var d = new Date();
