@@ -162,8 +162,8 @@ var dateNight = {
 
  console.log(dateNight.movie); //data going to firebase 
  console.log(dateNight.restaurant); //data going to firebase 
- $("#movieResult").text("");
- $("#yelpResults").text("");
+ // $("#movieResult").text("");
+ // $("#yelpResults").text("");
 
 database.ref().on("child_added", function(childSnapshot, prevChildKay){
 
@@ -173,9 +173,9 @@ console.log(childSnapshot.val());
 
 var movie = childSnapshot.val().movie;
 var restaurant = childSnapshot.val().restaurant;
-
+$('#clearmeplease').empty()
   //pushes selected results into table
- $("#dateNightInfo > tbody").append("<tr><td>" + movie + "</td><td>" + restaurant + "</td><td>");
+ $("#dateNightInfo > tbody").append("<tr><td>" + movie + "</td><td>" + restaurant + "</td></tr>");
 });
 
 console.log("FB is working")
