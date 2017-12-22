@@ -14,15 +14,12 @@
   var database = firebase.database();
 
 
-
-
-
-// function to find restaurant
-function searchRestaurant(argument) {
+	// function to find restaurant
+	function searchRestaurant(argument) {
 	//Yelp AJAX Call
 	var foodZip =  $('#input-zipCode').val().trim();
 	var foodCategory = $('#sel2').val().trim().toLowerCase()
-	var url = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=restaurant&location="+foodZip+"&categories="+foodCategory
+	var url = "https://cryptic-headland-94862.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=restaurant&location="+foodZip+"&categories="+foodCategory
 	var settings = {
 		 "async": true,
 		 "crossDomain": true,
@@ -33,18 +30,6 @@ function searchRestaurant(argument) {
 		 }
 	}
 	$.ajax(settings).done(function (response) {
-
-		// console.log(response);
-
-// test------code to isolate certain properties without having to make a request to showtimeAPI
-		// var findstars = function(starnumber) {
-		// 	// return response.businesses[0]
-		//     for (var i = 0, len = response.businesses.length; i < len; i++) {
-		//         if (response.businesses[i].rating === starnumber)
-		//             console.log(response.businesses[i]); // Return as soon as the object is found
-		//     } console(null); // The object was not found
-		// }		 
-		// console.log(findstars(4))
 
 		var results = response;
         console.log('yelp results', results);
@@ -60,10 +45,7 @@ function searchRestaurant(argument) {
         var fPhone = randomFoodResult.display_phone;
         
         //Display results in the DOM
-        $('#yelpResults').append(fName);
-
-
-
+        $('#yelpResults').html(fName);
 	})
 	
 	console.log('foodCategory', foodCategory)
@@ -87,9 +69,7 @@ function searchMovie(argument) {
        	    	api_key: apikey,
       		   },			
     	dataType: "jsonp",
-       	})
-
-       		
+       	})    		
 }
 
 
@@ -114,7 +94,7 @@ function dataHandler(data){
 
 	console.log('movieArray', movieArray)
 	randomMovie()
-	$('#movieResult').append(mName);
+	$('#movieResult').html(mName);
 }
 
 function randomMovie() {
@@ -124,25 +104,16 @@ function randomMovie() {
 	mName = randomMovieResult.title
 }
 
-    //Create variables from the ajax call to display movie info into the DOM
-
-    // var mLocation = randomMovieResult.location;
-    // var mRating = randomMovieResult.qualityRating.value;
-    // var mShowtimes = randomMovieResult.showtimes[].;
     
-    //Display results in the DOM
-
-
-
 
 $(document).ready(function() {
 	console.log('js is working')
 	$(document).on('click', '#search', searchRestaurant)
 	$(document).on('click', '#search', searchMovie)
-	// event.preventDefault();
 	$(document).on('click', '#viewOptions', searchRestaurant)
 	$(document).on('click', '#viewOptions', function() {
 		console.log(movieArray)
+		
 	})
 })
 
@@ -150,6 +121,7 @@ $(document).ready(function() {
 //once you click selct the data will push to firebase and the table above
 $("#select").on("click", function(event) {
 	event.preventDefault();
+
 var movie = $("#movieResult").text().trim();
 var restaurant = $("#yelpResults").text().trim();
 
@@ -165,21 +137,22 @@ var dateNight = {
  // $("#movieResult").text("");
  // $("#yelpResults").text("");
 
-database.ref().on("child_added", function(childSnapshot, prevChildKay){
+
+$('#clearthis').empty();
+database.ref().on("child_added", function(childSnapshot, prevChildKey){
 
 console.log(childSnapshot.val()); 
 
-
-
 var movie = childSnapshot.val().movie;
 var restaurant = childSnapshot.val().restaurant;
-$('#clearmeplease').empty()
+
+//var dates = []
   //pushes selected results into table
- $("#dateNightInfo > tbody").append("<tr><td>" + movie + "</td><td>" + restaurant + "</td></tr>");
+ $("#dateNightInfo > tbody").prepend("<tr><td>" + movie + "</td><td>" + restaurant + "</td></tr>");
 });
 
 console.log("FB is working")
 
 })
-//firebase is working, just need to figure out how to select results.
+
 
